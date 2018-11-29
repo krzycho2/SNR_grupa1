@@ -20,9 +20,9 @@ def create_perceptron(X, Y):
         for i,x in enumerate(X):
             if(np.matmul(X[i], w) * Y[i]) <= 0: # Y[i] = funkcja aktywacji 
                 w = w + eta*X[i]*Y[i]
-                # print("Nowe wagi: " + str(w) + "\n")
+                print("Nowe wagi: " + str(w) + "\n")
             else:
-                # print("Wagi bez zmian\n"
+                print("Wagi bez zmian\n")
     return w
 
 def test_perceptron(X, wagi):
