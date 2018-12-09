@@ -8,7 +8,7 @@ import glob
 from sklearn.svm import LinearSVC
 
 
-trainingPath  = "/home/krzysztof/Dokumenty/LBP/images/training"
+trainingPath  = "/home/krzysztof/Dokumenty/SNR_grupa1/images/training"
 keyboard = glob.glob(trainingPath + "/keyboard" + "/*.*")
 carpet = glob.glob(trainingPath + "/carpet" + "/*.*")
 desc = LocalBinaryPatterns(24, 8)
@@ -17,9 +17,9 @@ labels = []
 paths = carpet + keyboard
 print("Ekstrakcja cech\n")
 for imagePath in paths:
-	# load the image, convert it to grayscale, and describe it
-    # print(imagePath + "\n")
-    image = cv2.imread(imagePath) # Wczytujemy obraz
+    print(imagePath + "\n")
+    image = cv2.imread(imagePath)
+    print(str(image.shape) + "\n")
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY) # Skala szarości
     hist = desc.describe(gray) # LBP na obrazie - zwraca histogram
 
@@ -35,8 +35,8 @@ model = LinearSVC(C=100.0, random_state=42)
 model.fit(data, labels)
 print("Testowanie\n")
 # Testing
-keyboardTestPath = "/home/krzysztof/Dokumenty/LBP/images/testing/keyboard.png"
-carpetTestPath = "/home/krzysztof/Dokumenty/LBP/images/testing/carpet.png"
+keyboardTestPath = "/home/krzysztof/Dokumenty/SNR_grupa1/images/testing/keyboard.png"
+carpetTestPath = "/home/krzysztof/Dokumenty/SNR_grupa1/images/testing/carpet.png"
 testPaths = [keyboardTestPath,carpetTestPath] 
 for imagePath in testPaths:
 	# load the image, convert it to grayscale, describe it,
