@@ -11,10 +11,12 @@ from sklearn.svm import LinearSVC
 trainingPath  = "/home/krzysztof/Dokumenty/SNR_grupa1/images/training"
 keyboard = glob.glob(trainingPath + "/keyboard" + "/*.*")
 carpet = glob.glob(trainingPath + "/carpet" + "/*.*")
+area_rug = glob.glob(trainingPath + "/area_rug" + "/*.*")
+wrapping_paper = glob.glob(trainingPath + "/wrapping_paper" + "/*.*")
 desc = LocalBinaryPatterns(24, 8)
 data = []
 labels = []
-paths = carpet + keyboard
+paths = carpet + keyboard + area_rug + wrapping_paper
 print("Ekstrakcja cech\n")
 for imagePath in paths:
     print(imagePath + "\n")
@@ -37,7 +39,9 @@ print("Testowanie\n")
 # Testing
 keyboardTestPath = "/home/krzysztof/Dokumenty/SNR_grupa1/images/testing/keyboard.png"
 carpetTestPath = "/home/krzysztof/Dokumenty/SNR_grupa1/images/testing/carpet.png"
-testPaths = [keyboardTestPath,carpetTestPath] 
+area_rugTestPath = "/home/krzysztof/Dokumenty/SNR_grupa1/images/testing/area_rug.png"
+wrapping_paperTestPath = "/home/krzysztof/Dokumenty/SNR_grupa1/images/testing/wrapping_paper.png"
+testPaths = [keyboardTestPath,carpetTestPath, area_rugTestPath, wrapping_paperTestPath] 
 for imagePath in testPaths:
 	# load the image, convert it to grayscale, describe it,
 	# and classify it
