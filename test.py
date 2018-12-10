@@ -19,14 +19,14 @@ paths= [mainFolderPath  + "/t10k-images-idx3-ubyte",
         mainFolderPath  + "/train-images-idx3-ubyte",
         mainFolderPath  + "/train-labels.idx1-ubyte"]
 
-testImages  = getMNISTdata(paths[0])
-testLabels  = getMNISTdata(paths[1])
-trainImages = getMNISTdata(paths[2])
-trainLabels = getMNISTdata(paths[3])
+testImages  = metody.getMNISTdata(paths[0])
+testLabels  = metody.getMNISTdata(paths[1])
+trainImages = metody.getMNISTdata(paths[2])
+trainLabels = metody.getMNISTdata(paths[3])
 
 
 # Ewentualna konwersja do int64
-testImages = uint2int(testImages)
-testLabels = uint2int(testLabels)
-trainImages = uint2int(trainImages)
-trainLabels = uint2int(trainLabels)
+testImages = metody.uint2int(testImages)
+testLabels = metody.uint2int(testLabels)
+trainImages = metody.uint2int(trainImages)
+trainLabels = metody.uint2int(trainLabels)
