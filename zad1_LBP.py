@@ -1,35 +1,41 @@
-from pyimagesearch.localbinarypatterns import LocalBinaryPatterns
-from sklearn.svm import LinearSVC
-import cv2
+from localbinarypatterns import LocalBinaryPatterns
 import matplotlib.pyplot as plt
-from os import listdir
-from os.path import isfile,join
-import glob
-from sklearn.svm import LinearSVC
 import metody   # user-defined
+import numpy as np
+import pickle
+import cv2
 
+# ---------------------------------------------------
+# PROJEKT Z SNR - Zadanie 1. w 3 aktach
+# by Krzysztof Krupiński 2018
+# ---------------------------------------------------
+# AKT 1: Ekstrakcja cech obrazów za pomocą deskryptora 
 
-import metody
 # Ścieżka główna do folderu z liśćmi
 trainingMainPath = "/home/krzysztof/Dokumenty/SNR_grupa1/Folio Leaf Dataset/Folio"
 # paths - wszystkie (pełne) ścieżki do zdjęć liści
-paths = metody.getListOfFiles(trainingMainPath)
-desc = LocalBinaryPatterns(24, 8)
+paths = metody.getListOfFiles(trainingMainPath)  # Lista wszystkich plików w folderze
+desc = LocalBinaryPatterns(16, 2)  # Obiekt klasy LBP - deksryptor LBP 8 - liczba próbek w sąsiedztwie, 2 - promień sąsiedztwa
 data = []
 labels = []
+
+licznik = 0  # Do wyświetlania postępou ekstracji
+allFiles =  len(paths)
+
 print("Ekstrakcja cech\n")
-licznik = 0
-
 for imagePath in paths:
-    print(imagePath + "\n")
-    image = cv2.imread(imagePath)
-    print(str(image.shape) + "\n")
-    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY) # Skala szarości
-    hist = desc.describe(gray) # LBP na obrazie - zwraca histogram
+	image = cv2.imread(imagePath)	# Wczytanie obrazu
+	gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY) # Skala szarości
+	hist = desc.describe(gray) # LBP wykonane na obrazie - zwraca histogram
 
-	# extract the label from the image path, then update the
-	# label and data lists
-    labels.append(imagePath.split("/")[-2])
-    data.append(hist)
-    licznik += 1
-    print("Wykonano: " + str(int( licznik / len(trainingMainPath) )))
+	labels.append(imagePath.split("/")[-2]) # Tylko nazwa kwiatu
+	data.append(hist)
+	print("Wykonano: " + str( licznik / allFiles*100 ) + " %\n")
+	licznik += 1
+	
+data = np.array(data, dtype = "float32")
+labels = np.array(labels)
+# Zapis wyesktrachowanych cech do pliku o łatwym dostępie
+with open('LBPdata16_2.pckl', 'wb') as f:
+	pickle.dump([data, labels], f)
+	

@@ -1,6 +1,7 @@
 import os.path
 import struct
 import numpy as np
+
 def getListOfFiles(dirName):
     # create a list of file and sub directories 
     # names in the given directory 
@@ -44,3 +45,15 @@ def getMNISTdata(filePath):
         else:
             data = ""
     return data
+
+def labelsToNumbers(labs):
+    length = len(labs)
+    outputLab = np.zeros(length, dtype=int)
+
+    labList = np.array(['mulberry leaf', 'fruitcitere', 'pomme jacquot', 'croton', 'caricature plant', 'papaya', 'jackfruit', 'sweet olive', 'hibiscus', 'ficus', 'lychee', 'vieux garcon', 'geranium', 'sweet potato', 'rose', 'thevetia', 'ashanti blood', 'beaumier du perou', 'ketembilla', 'coeur demoiselle', 'eggplant', 'betel', 'coffee', 'chrysanthemum', 'chocolate tree', 'duranta gold', 'chinese guava', 'pimento', 'bitter orange', 'guava', 'star apple', 'barbados cherry'])
+    for i in range(length):
+        for j in range(len(labList)):
+            if labs[i] == labList[j]:
+                outputLab[i] = j
+    
+    return outputLab

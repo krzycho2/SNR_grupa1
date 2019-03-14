@@ -42,6 +42,7 @@ carpetTestPath = "/home/krzysztof/Dokumenty/SNR_grupa1/images/testing/carpet.png
 area_rugTestPath = "/home/krzysztof/Dokumenty/SNR_grupa1/images/testing/area_rug.png"
 wrapping_paperTestPath = "/home/krzysztof/Dokumenty/SNR_grupa1/images/testing/wrapping_paper.png"
 testPaths = [keyboardTestPath,carpetTestPath, area_rugTestPath, wrapping_paperTestPath] 
+
 for imagePath in testPaths:
 	# load the image, convert it to grayscale, describe it,
 	# and classify it
@@ -51,9 +52,11 @@ for imagePath in testPaths:
 	prediction = model.predict(hist.reshape(1, -1))
 	
 	# display the image and the prediction
-	cv2.putText(image, prediction[0], (10, 30), cv2.FONT_HERSHEY_SIMPLEX,
-		1.0, (0, 0, 255), 3)
 
+	cv2.putText(image, prediction[0], (300, 300), cv2.FONT_HERSHEY_SIMPLEX,
+		10.0, (0, 0, 255), 10)
+	print(imagePath + "\n")
 	plt.imshow(image)
 	plt.show()
+	
 
