@@ -1,2 +1,2 @@
 # SNR_grupa1
-Projekt z przedmiotu SNR 
+This is a project for a course Neural Networks on Faculty of Electronics and Information Technology of Warsaw University of Technology.
